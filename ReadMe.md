@@ -47,7 +47,7 @@ Whether you're a retro game developer, hobbyist, or enthusiast, these scripts ma
 
 1. Clone this repository or download the install script:
     ```powershell
-    git clone https://github.com/yourusername/retro-dev-installer.git
+    git clone https://github.com/OldSkoolCoder/Dev.Environments.Scripts.git
     cd retro-dev-installer
     ```
 
@@ -69,7 +69,7 @@ Whether you're a retro game developer, hobbyist, or enthusiast, these scripts ma
 
 1. Clone this repository:
     ```bash
-    git clone https://github.com/yourusername/retro-dev-installer.git
+    git clone https://github.com/OldSkoolCoder/Dev.Environments.Scripts.git
     cd retro-dev-installer
     ```
 
