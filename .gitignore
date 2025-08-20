@@ -1,2 +1,5 @@
+.gitignore
 *.pdf
 Samba_Install.sh
+Default Workspaces/
+.vscode/
