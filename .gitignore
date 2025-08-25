@@ -1,7 +1,6 @@
 .gitignore
 *.pdf
 Samba_Install.sh
-.vscode/
 Default Workspaces
 build
 */.source.txt
