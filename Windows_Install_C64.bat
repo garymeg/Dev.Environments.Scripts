@@ -104,8 +104,10 @@ set PATH=%PATH%;%C64DeBug_DIR%
 @echo on
 > %SETTINGS_FILE% echo {
 >> %SETTINGS_FILE% echo     "editor.tabSize": 4,
->> %SETTINGS_FILE% echo     "editor.rulers": [80, 120],
+>> %SETTINGS_FILE% echo     "editor.rulers": [60],
 >> %SETTINGS_FILE% echo     "files.autoSave": "afterDelay",
+>> %SETTINGS_FILE% echo     "kickassembler.byteDumpFile": true,
+>> %SETTINGS_FILE% echo     "kickassembler.assembler.option.outputDirectory": "./build",
 >> %SETTINGS_FILE% echo     "kickassembler.java.runtime": "%JDK_DEST:\=/%/jdk-24.0.1/bin/java.exe",
 >> %SETTINGS_FILE% echo     "kickassembler.assembler.jar": "%KICK_DIR:\=/%/KickAss.jar",
 >> %SETTINGS_FILE% echo     "kickassembler.emulator.runtime": "%TOOLS_DIR:\=/%/VICE/bin/x64sc.exe",

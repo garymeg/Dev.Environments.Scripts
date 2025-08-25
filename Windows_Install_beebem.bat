@@ -5,8 +5,8 @@ setlocal enabledelayedexpansion
 set "TOOLS_DIR=%USERPROFILE%\DeveloperTools"
 set "TEMP_DIR=%TEMP%\DevSetup"
 set "KICK_DIR=%TOOLS_DIR%\KickAssembler"
+set "BEEBEM_DIR=%TOOLS_DIR%\BeebEm"
 set "BEEBASM_DIR=%TOOLS_DIR%\BeebAsm"
-set "X16_DIR=%TOOLS_DIR%\beebem"
 set "EXTENSION=paulhocker.kick-assembler-vscode-ext"
 set "BEEBASM_EXTENSION=simondotm.beeb-vsc"
 set "CONFIG_DIR=%USERPROFILE%\AppData\Roaming\Code\User"
@@ -16,7 +16,8 @@ set "SETTINGS_FILE=%CONFIG_DIR%\settings.json"
 mkdir "%TOOLS_DIR%" 2>nul
 mkdir "%TEMP_DIR%" 2>nul
 mkdir "%KICK_DIR%" 2>nul
-mkdir "%X16_DIR%" 2>nul
+mkdir "%BEEBASM_DIR%" 2>nul
+mkdir "%BEEBEM_DIR%" 2>nul
 
 :: Check for curl or fallback
 where curl >nul 2>nul
@@ -77,6 +78,15 @@ set "KICK_ZIP=%TEMP_DIR%\kickassembler.zip"
 curl -L -o "%KICK_ZIP%" "%KICK_URL%"
 tar -xf "%KICK_ZIP%" -C "%KICK_DIR%"
 
+
+echo ========================================
+echo INSTALLING Visual C++ Redistributable
+echo ========================================
+set MSVC_URL="https://aka.ms/vs/17/release/vc_redist.x86.exe"
+set "MSVC_EXE=%TEMP_DIR%\vc_redist.x86.exe"
+curl -L -o "%MSVC_EXE%" "%MSVC_URL%"
+"%MSVC_EXE%" /QUIET /NORESTART
+
 echo ========================================
 echo DOWNLOADING BEEBASM
 echo ========================================
@@ -85,6 +95,7 @@ set "BEEBASM_ZIP=%TEMP_DIR%\beebasm.zip"
 
 curl -L -o "%BEEBASM_ZIP%" "%BEEBASM_URL%"
 tar -xf "%BEEBASM_ZIP%" -C "%BEEBASM_DIR%"
+set PATH=%PATH%;%TOOLS_DIR%\beebasm
 
 echo ========================================
 echo DOWNLOADING beebem EMULATOR
@@ -93,7 +104,7 @@ set "beebem_url=https://github.com/stardot/beebem-windows/releases/download/4.19
 set "beebem_ZIP=%TEMP_DIR%\beebem419.zip"
 
 curl -L -o "%beebem_ZIP%" "%beebem_url%"
-tar -xf "%beebem_ZIP%" -C "%beebem_DIR%"
+tar -xf "%beebem_ZIP%" -C "%TOOLS_DIR%"
 
 set PATH=%PATH%;%TOOLS_DIR%\beebem
 

@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"kickassembler.assembler.jar": "C:\\Users\\gmeth\\DeveloperTools\\KickAssembler\\KickAss.jar",
+		"kickassembler.java.runtime": "C:\\Program Files\\Java\\jdk-24\\bin\\java.exe"
+	}
+}
