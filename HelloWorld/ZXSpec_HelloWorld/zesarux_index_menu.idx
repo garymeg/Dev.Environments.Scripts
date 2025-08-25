@@ -1,0 +1,119 @@
+Welcome 1/8
+Select English Language
+Elige idioma Espanol
+Escull idioma Catala
+Cancel
+
+Main Menu
+Smart load
+Snapshot
+Machine
+Audio
+Display
+Storage
+Debug
+Network
+Windows
+Settings
+Search menu
+Procrastinate
+Help
+ESC Close menu
+F10 Exit ZEsarUX
+
+Main Menu-> Machine
+--Select manufacturer--
+Amstrad
+Ascii Corp
+Cambridge Computers
+Chloe Corporation
+Coleco Industries
+Czerweny Electronica
+Investronica
+Jupiter Cantab
+Mario Prato
+Microdigital Eletronica
+Miles Gordon Technology
+NedoPC
+New Horizons
+Next Team
+Pentagon
+Science of Cambridge
+Sega
+Sinclair Research
+Spectravideo Intl
+Timex Computer
+Timex Sinclair
+TS Labs
+ZXUno Team
+ESC Close
+
+Main Menu-> Machine menu-> Sinclair Research
+ZX Spectrum 16k
+ZX Spectrum 48k
+ZX Spectrum+ 48k
+ZX Spectrum+ 128k
+ZX80
+ZX81
+QL
+ESC Close
+
+Main Menu-> Windows
+Process management
+Process switcher
+Trash Can
+Reduce all windows
+Minimize all windows
+Rearrange all windows
+Cascade all windows
+Maximize all windows
+Reduce+rearrange all windows
+Minimize+rearrange all windows
+Close all windows
+ESC Close
+
+Main Menu-> Settings
+Accessibility
+Audio
+Configuration file
+Display
+Function keys
+General
+Hardware
+Storage
+ZX Desktop
+ZX Vision
+[ ] Advanced menu items
+ESC Close
+
+Main Menu-> Settings Menu-> ZX Desktop Settings
+[X] Enabled
+[X] Open Menu on ZX Desktop
+[X] Direct access upper buttons
+[X] Direct access lower buttons
+[X] Icons on ZX Desktop
+--Background--
+    Fill type [Solid]
+    Primary Fill Color [Cyan]
+    SCR file []
+ESC Close
+
+ZX Desktop Settings
+[ ] Enabled
+ESC Close
+
+Main Menu-> Settings Menu-> ZX Vision Settings
+    Menu char width [8]
+    Menu char height [8]
+[ ] First aid help
+    Style [ZEsarUX Plus]
+[ ] Tooltips
+[X] Multitask menu
+[ ] Stop emulation on menu
+[ ] Old menu behaviour (ESC, etc)
+[X] Background windows
+[X]  Even when menu closed
+[X] Reopen windows on start
+Special FX
+ESC Close
+
