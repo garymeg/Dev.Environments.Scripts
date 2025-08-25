@@ -44,7 +44,6 @@ Whether you're a retro game developer, hobbyist, or enthusiast, these scripts ma
 | *Pasmo Z80 Assembler | Will be auto-installed if not found*                  |
 | *BeebEm Emulator     | Will be auto-installed if not found*                  |
 | *Beebasm Emulator    | Will be auto-installed if not found*                  |
-
 *Depending on installer script used 
 ---
 
