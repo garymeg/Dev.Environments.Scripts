@@ -5,9 +5,7 @@
 		}
 	],
 	"settings": {
-		"kickassembler.assembler.jar": "C:\\Users\\gmeth\\DeveloperTools\\KickAssembler\\KickAss.jar",
-		"kickassembler.java.runtime": "C:\\Program Files\\Java\\jdk-24\\bin\\java.exe",
-		"kickassembler.emulator.runtime": "C:\\Users\\gmeth\\DeveloperTools\\CommanderX16/x16emu.exe",
+		"kickassembler.emulator.runtime": "C:\\Users\\gary\\DeveloperTools\\CommanderX16/x16emu.exe",
 		"kickassembler.emulator.options": "-prg ${kickassembler:buildFilename} -run"
 	}
 }

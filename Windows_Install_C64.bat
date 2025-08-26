@@ -86,8 +86,6 @@ set "VICE_ZIP=%TEMP_DIR%\VICE.zip"
 curl -L -o "%VICE_ZIP%" "%VICE_URL%"
 tar -xf "%VICE_ZIP%" --strip-components=1 -C "%C64_DIR%"
 
-set PATH=%PATH%;%C64_DIR%/bin
-
 echo ========================================
 echo DOWNLOADING C64 Debugger
 echo ========================================
@@ -99,22 +97,28 @@ tar -xf "%C64Debug_ZIP%" -C "%TEMP_DIR%"
 
 tar -xf "%TEMP_DIR%\C64-65XE-Debugger-v0.64.58-win32.zip" --strip-components=1 -C "%C64DeBug_DIR%"
 
-set PATH=%PATH%;%C64DeBug_DIR%
-
 @echo on
 > %SETTINGS_FILE% echo {
 >> %SETTINGS_FILE% echo     "editor.tabSize": 4,
 >> %SETTINGS_FILE% echo     "editor.rulers": [60],
+>> %SETTINGS_FILE% echo     "terminal.integrated.defaultProfile.windows": "Command Prompt",
 >> %SETTINGS_FILE% echo     "files.autoSave": "afterDelay",
 >> %SETTINGS_FILE% echo     "kickassembler.byteDumpFile": true,
 >> %SETTINGS_FILE% echo     "kickassembler.assembler.option.outputDirectory": "./build",
->> %SETTINGS_FILE% echo     "kickassembler.java.runtime": "%JDK_DEST:\=/%/jdk-24.0.1/bin/java.exe",
+>> %SETTINGS_FILE% echo     "kickassembler.java.runtime": "%JDK_DEST:\=/%/bin/java.exe",
 >> %SETTINGS_FILE% echo     "kickassembler.assembler.jar": "%KICK_DIR:\=/%/KickAss.jar",
 >> %SETTINGS_FILE% echo     "kickassembler.emulator.runtime": "%TOOLS_DIR:\=/%/VICE/bin/x64sc.exe",
 >> %SETTINGS_FILE% echo     "kickassembler.debugger.runtime": "%C64DeBug_DIR:\=/%/C64Debugger.exe",
+>> %SETTINGS_FILE% echo     "files.associations": {
+>> %SETTINGS_FILE% echo         "*.asm": "kickassembler",
+>> %SETTINGS_FILE% echo         "*.6502": "beebasm", 
+>> %SETTINGS_FILE% echo         "*.z80": "pasmo"
+>> %SETTINGS_FILE% echo     }
 >> %SETTINGS_FILE% echo }
-
-code --install-extension "%EXTENSION%" --force
+@echo off
+cls
+start /MIN code --install-extension "%EXTENSION%" --force
+start /MIN code --install-extension "%BEEBASM_EXTENSION%" --force
 
 echo.
 echo ========================================
@@ -125,4 +129,6 @@ echo   %TOOLS_DIR%\Git\bin
 echo   %KICK_DIR%
 echo   %X16_DIR%
 echo ========================================
+start rundll32 sysdm.cpl,EditEnvironmentVariables
 pause
+@echo on

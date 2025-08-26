@@ -25,24 +25,24 @@ if errorlevel 1 (
     set "DOWNLOADER=curl"
 )
 
-echo ========================================
-echo INSTALLING JDK 8 (Temurin from Adoptium)
-echo ========================================
-set "JDK_URL=https://download.java.net/java/GA/jdk24.0.1/24a58e0e276943138bf3e963e6291ac2/9/GPL/openjdk-24.0.1_windows-x64_bin.zip"
-set "JDK_ZIP=%TEMP_DIR%\jdk.zip"
-set "JDK_DEST=%TOOLS_DIR%\jdk"
+@REM echo ========================================
+@REM echo INSTALLING JDK 8 (Temurin from Adoptium)
+@REM echo ========================================
+@REM set "JDK_URL=https://download.java.net/java/GA/jdk24.0.1/24a58e0e276943138bf3e963e6291ac2/9/GPL/openjdk-24.0.1_windows-x64_bin.zip"
+@REM set "JDK_ZIP=%TEMP_DIR%\jdk.zip"
+@REM set "JDK_DEST=%TOOLS_DIR%\jdk"
 
-mkdir "%JDK_DEST%" 2>nul
+@REM mkdir "%JDK_DEST%" 2>nul
 
-if "%DOWNLOADER%"=="curl" (
-    curl -L -o "%JDK_ZIP%" "%JDK_URL%"
-) else (
-    bitsadmin /transfer "JDKDownload" "%JDK_URL%" "%JDK_ZIP%"
-)
+@REM if "%DOWNLOADER%"=="curl" (
+@REM     curl -L -o "%JDK_ZIP%" "%JDK_URL%"
+@REM ) else (
+@REM     bitsadmin /transfer "JDKDownload" "%JDK_URL%" "%JDK_ZIP%"
+@REM )
 
-tar -xf "%JDK_ZIP%" -C "%JDK_DEST%"
+@REM tar -xf "%JDK_ZIP%" -C "%JDK_DEST%"
 
-set PATH=%PATH%;%JDK_DEST%\jdk-24.0.1\bin
+@REM set PATH=%PATH%;%JDK_DEST%\jdk-24.0.1\bin
 
 echo ========================================
 echo INSTALLING GIT
@@ -89,11 +89,18 @@ set PATH=%PATH%;%TOOLS_DIR%\ZEsarUX
 @echo on
 > %SETTINGS_FILE% echo {
 >> %SETTINGS_FILE% echo     "editor.tabSize": 4,
->> %SETTINGS_FILE% echo     "editor.rulers": [80, 120],
+>> %SETTINGS_FILE% echo     "editor.rulers": [60],
+>> %SETTINGS_FILE% echo     "terminal.integrated.defaultProfile.windows": "Command Prompt",
 >> %SETTINGS_FILE% echo     "files.autoSave": "afterDelay",
+>> %SETTINGS_FILE% echo     "files.associations": {
+>> %SETTINGS_FILE% echo         "*.asm": "kickassembler",
+>> %SETTINGS_FILE% echo         "*.6502": "beebasm", 
+>> %SETTINGS_FILE% echo         "*.z80": "pasmo"
+>> %SETTINGS_FILE% echo     }
 >> %SETTINGS_FILE% echo }
-
-code --install-extension "%EXTENSION%" --force
+@echo off
+cls
+start /MIN code --install-extension "%Z80EXTENSION%" --force
 
 echo.
 echo ========================================
@@ -104,4 +111,6 @@ echo   %TOOLS_DIR%\Git\bin
 echo   %KICK_DIR%
 echo   %X16_DIR%
 echo ========================================
+start rundll32 sysdm.cpl,EditEnvironmentVariables
 pause
+@echo on

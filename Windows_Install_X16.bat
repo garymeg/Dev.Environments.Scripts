@@ -85,18 +85,29 @@ curl -L -o "%X16_ZIP%" "%X16_URL%"
 tar -xf "%X16_ZIP%" -C "%X16_DIR%"
 
 set PATH=%PATH%;%TOOLS_DIR%\CommanderX16
-
 @echo on
 > %SETTINGS_FILE% echo {
 >> %SETTINGS_FILE% echo     "editor.tabSize": 4,
->> %SETTINGS_FILE% echo     "editor.rulers": [80, 120],
+>> %SETTINGS_FILE% echo     "editor.rulers": [60],
+>> %SETTINGS_FILE% echo     "terminal.integrated.defaultProfile.windows": "Command Prompt",
 >> %SETTINGS_FILE% echo     "files.autoSave": "afterDelay",
->> %SETTINGS_FILE% echo     "kickassembler.java.runtime": "%JDK_DEST:\=/%/jdk-24.0.1/bin/java.exe",
+>> %SETTINGS_FILE% echo     "kickassembler.byteDumpFile": true,
+>> %SETTINGS_FILE% echo     "kickassembler.assembler.option.outputDirectory": "./build",
+>> %SETTINGS_FILE% echo     "kickassembler.java.runtime": "%JDK_DEST:\=/%/bin/java.exe",
 >> %SETTINGS_FILE% echo     "kickassembler.assembler.jar": "%KICK_DIR:\=/%/KickAss.jar",
->> %SETTINGS_FILE% echo     "kickassembler.emulator.runtime": "%TOOLS_DIR:\=/%/CommanderX16/x16emu.exe",
+>> %SETTINGS_FILE% echo     "kickassembler.emulator.runtime": "%TOOLS_DIR:\=/%/VICE/bin/x64sc.exe",
+>> %SETTINGS_FILE% echo     "kickassembler.debugger.runtime": "%C64DeBug_DIR:\=/%/C64Debugger.exe",
+>> %SETTINGS_FILE% echo     "files.associations": {
+>> %SETTINGS_FILE% echo         "*.asm": "kickassembler",
+>> %SETTINGS_FILE% echo         "*.6502": "beebasm", 
+>> %SETTINGS_FILE% echo         "*.z80": "pasmo"
+>> %SETTINGS_FILE% echo     }
 >> %SETTINGS_FILE% echo }
-
-code --install-extension "%EXTENSION%" --force
+@echo off
+cls
+start /MIN code --install-extension "%EXTENSION%" --force
+start /MIN code --install-extension "%BEEBASM_EXTENSION%" --force
+start /MIN code --install-extension "%Z80EXTENSION%" --force
 
 echo.
 echo ========================================
@@ -107,4 +118,6 @@ echo   %TOOLS_DIR%\Git\bin
 echo   %KICK_DIR%
 echo   %X16_DIR%
 echo ========================================
+start rundll32 sysdm.cpl,EditEnvironmentVariables
 pause
+@echo on
