@@ -1,6 +1,8 @@
-BasicUpstart2(Start)
+*=$0401
+BasicUpstart(Start)
 .encoding "petscii_mixed"
 
+*=$040D
 .const CHAROUT = $ffd2
 Start:
         ldx #$00
