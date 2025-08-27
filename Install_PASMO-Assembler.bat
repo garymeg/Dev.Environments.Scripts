@@ -6,7 +6,7 @@ cls
 set "TOOLS_DIR=%USERPROFILE%\DeveloperTools"
 set "TEMP_DIR=%TEMP%\DevSetup"
 :: Create Common directories
-mkdir "%TOOLS_DIR%" "%TEMP_DIR%"
+mkdir "%TOOLS_DIR%" "%TEMP_DIR%" >nul 2>nul  2>nul >nul 2>nul  2>nul >nul 2>nul  2>nul >nul 2>nul
 
 :: Check for curl or fallback
 where curl >nul 2>nul
