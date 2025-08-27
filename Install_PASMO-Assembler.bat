@@ -18,30 +18,34 @@ if errorlevel 1 (
 )
 
 echo ========================================
-echo INSTALLING VISUAL STUDIO CODE
+echo DOWNLOADING PASMO ASSEMBLER
 echo ========================================
+:: Set installation directories
+set "PASMO_DIR=%TOOLS_DIR%\PASMO-Assembler"
+set "PASMO_URL=https://pasmo.speccy.org/bin/pasmo-0.5.4.beta2.zip"
+set "PASMO_ZIP=%TEMP_DIR%\pasmo.zip"
+mkdir "%PASMO_DIR%" 2>nul
 
-:: Set download URL and output file
-set "VSCODE_URL=https://update.code.visualstudio.com/latest/win32-x64-user/stable"
-set "VSCODE_EXE=%TEMP_DIR%\vscode-installer.exe"
-
-:: Download Visual Studio Code
+:: Download PASMO Assembler
 if "%DOWNLOADER%"=="curl" (
-    curl -L -o "%VSCODE_EXE%" "%VSCODE_URL%"
+    curl -L -o "%PASMO_ZIP%" "%PASMO_URL%"
 ) else (
-    bitsadmin /transfer "VSCODEDownload" "%VSCODE_URL%" "%VSCODE_EXE%"
+    bitsadmin /transfer "PASMODownload" "%PASMO_URL%" "%PASMO_ZIP%"
 )
 
-:: Install Visual Studio Code
-"%VSCODE_EXE%" /VERYSILENT /NORESTART /MERGETASKS=!runcode
+:: Extract PASMO Assembler
+tar -xf "%PASMO_ZIP%" -C "%PASMO_DIR%"
 
-:: Update PATH
-setx PATH "PATH=%PATH%;%USERPROFILE%\AppData\Local\Programs\Microsoft VS Code\bin"
+:: Cleanup
+del "%PASMO_ZIP%"
 
 :: Final messages
 echo.
 echo ========================================
 echo DONE!
+echo Add these to your PATH (manually):
+echo   %PASMO_DIR%
 echo ========================================
+start rundll32 sysdm.cpl,EditEnvironmentVariables
 pause
 @echo on

@@ -54,3 +54,11 @@ if "%DOWNLOADER%"=="curl" (
 echo.
 echo CHECK Taskbar for UAC prompt
 "%MSVC2_EXE%" /QUIET /NORESTART
+
+:: Final messages
+echo.
+echo ========================================
+echo DONE!
+echo ========================================
+pause
+@echo on

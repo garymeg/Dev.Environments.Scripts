@@ -26,10 +26,26 @@ set "VICE_ZIP=%TEMP_DIR%\VICE.zip"
 set "VICE_DIR=%TOOLS_DIR%\Vice"
 mkdir "%VICE_DIR%" 2>nul
 
+:: Download VICE Emulator
 if "%DOWNLOADER%"=="curl" (
     curl -L -o "%VICE_ZIP%" "%VICE_URL%"
 ) else (
     bitsadmin /transfer "VICEDownload" "%VICE_URL%" "%VICE_ZIP%"
 )
 
+:: Extract VICE Emulator
 tar -xf "%VICE_ZIP%" --strip-components=1 -C "%VICE_DIR%"
+
+:: Cleanup
+del "%VICE_ZIP%"
+
+:: Final messages
+echo.
+echo ========================================
+echo DONE!
+echo Add these to your PATH (manually):
+echo   %VICE_DIR%/bin
+echo ========================================
+start rundll32 sysdm.cpl,EditEnvironmentVariables
+pause
+@echo on

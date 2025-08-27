@@ -36,3 +36,17 @@ if "%DOWNLOADER%"=="curl" (
 
 :: Extract Kick Assembler
 tar -xf "%KICK_ZIP%" -C "%KICK_DIR%"
+
+:: Cleanup
+del "%KICK_ZIP%"
+
+:: Final messages
+echo.
+echo ========================================
+echo DONE!
+echo Add these to your PATH (manually):
+echo   %KICK_DIR%
+echo ========================================
+start rundll32 sysdm.cpl,EditEnvironmentVariables
+pause
+@echo on

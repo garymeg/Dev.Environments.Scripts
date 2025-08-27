@@ -36,3 +36,17 @@ if "%DOWNLOADER%"=="curl" (
 
 :: Extract Commander X16 Emulator
 tar -xf "%X16_ZIP%" -C "%X16_DIR%"
+
+:: Cleanup
+del "%X16_ZIP%"
+
+:: Final messages
+echo.
+echo ========================================
+echo DONE!
+echo Add these to your PATH (manually):
+echo   %X16_DIR%
+echo ========================================
+start rundll32 sysdm.cpl,EditEnvironmentVariables
+pause
+@echo on

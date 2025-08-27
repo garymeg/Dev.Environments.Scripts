@@ -35,3 +35,17 @@ if "%DOWNLOADER%"=="curl" (
 
 :: Extract BeebAsm
 tar -xf "%BEEBASM_ZIP%" -C "%BEEBASM_DIR%"
+
+:: Cleanup
+del "%BEEBASM_ZIP%"
+
+:: Final messages
+echo.
+echo ========================================
+echo DONE!
+echo Add these to your PATH (manually):
+echo   %BEEBASM_DIR%
+echo ========================================
+start rundll32 sysdm.cpl,EditEnvironmentVariables
+pause
+@echo on

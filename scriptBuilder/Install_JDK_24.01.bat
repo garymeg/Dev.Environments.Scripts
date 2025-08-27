@@ -35,3 +35,17 @@ if "%DOWNLOADER%"=="curl" (
 
 :: Extract JDK
 tar -xf "%JDK_ZIP%" --strip-components=1 -C "%JDK_DEST%"
+
+:: Cleanup
+del "%JDK_ZIP%"
+
+:: Final messages
+echo.
+echo ========================================
+echo DONE!
+echo Add these to your PATH (manually):
+echo   %JDK_DEST%\bin
+echo ========================================
+start rundll32 sysdm.cpl,EditEnvironmentVariables
+pause
+@echo on

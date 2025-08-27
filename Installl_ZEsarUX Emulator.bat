@@ -18,30 +18,32 @@ if errorlevel 1 (
 )
 
 echo ========================================
-echo INSTALLING VISUAL STUDIO CODE
+echo DOWNLOADING ZEsarUX EMULATOR
 echo ========================================
+:: Set installation directories
+set "ZESARUX_DIR=%TOOLS_DIR%\ZEsarUX"
+mkdir "%ZESARUX_DIR%" 2>nul
 
-:: Set download URL and output file
-set "VSCODE_URL=https://update.code.visualstudio.com/latest/win32-x64-user/stable"
-set "VSCODE_EXE=%TEMP_DIR%\vscode-installer.exe"
-
-:: Download Visual Studio Code
+:: Download ZEsarUX
 if "%DOWNLOADER%"=="curl" (
-    curl -L -o "%VSCODE_EXE%" "%VSCODE_URL%"
+    curl -L -o "%ZESARUX_ZIP%" "%ZESARUX_URL%"
 ) else (
-    bitsadmin /transfer "VSCODEDownload" "%VSCODE_URL%" "%VSCODE_EXE%"
+    bitsadmin /transfer "ZEsarUXDownload" "%ZESARUX_URL%" "%ZESARUX_ZIP%"
 )
 
-:: Install Visual Studio Code
-"%VSCODE_EXE%" /VERYSILENT /NORESTART /MERGETASKS=!runcode
+:: Extract ZEsarUX
+tar -xf "%ZESARUX_ZIP%" --strip-components=1 -C "%ZESARUX_DIR%"
 
-:: Update PATH
-setx PATH "PATH=%PATH%;%USERPROFILE%\AppData\Local\Programs\Microsoft VS Code\bin"
+:: Cleanup
+del "%ZESARUX_ZIP%"
 
 :: Final messages
 echo.
 echo ========================================
 echo DONE!
+echo Add these to your PATH (manually):
+echo   %ZESARUX_DIR%
 echo ========================================
+start rundll32 sysdm.cpl,EditEnvironmentVariables
 pause
 @echo on

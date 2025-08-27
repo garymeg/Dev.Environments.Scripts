@@ -33,3 +33,14 @@ if "%DOWNLOADER%"=="curl" (
 
 :: Install GIT
 "%GIT_EXE%" /VERYSILENT /NORESTART /DIR="%TOOLS_DIR%\Git"
+
+:: Cleanup
+del "%GIT_EXE%"
+
+:: Final messages
+echo.
+echo ========================================
+echo DONE!
+echo ========================================
+pause
+@echo on

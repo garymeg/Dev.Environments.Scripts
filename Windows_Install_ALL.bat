@@ -172,6 +172,7 @@ tar -xf "%PASMO_ZIP%" -C "%PASMO_DIR%"
 echo ========================================
 echo DOWNLOADING ZEsarUX EMULATOR
 echo ========================================
+
 set "ZESARUX_URL=https://github.com/chernandezba/zesarux/releases/download/ZEsarUX-12.1-Beta1/ZEsarUX_win-12.1-Beta1.zip"
 set "ZESARUX_ZIP=%TEMP_DIR%\ZEsarUX.zip"
 
@@ -190,6 +191,8 @@ tar -xf "%RETRODEBUG_ZIP%" --strip-components=1 -C "%RETRODEBUG_DIR%"
 echo ========================================
 echo DOWNLOADING NES EMULATOR
 echo ========================================
+
+
 set "NES_URL=https://github.com/TASEmulators/fceux/releases/download/v2.6.6/fceux-2.6.6-win64.zip"
 set "NES_ZIP=%TEMP_DIR%\NES.zip"
 
@@ -225,9 +228,6 @@ echo ========================================
 echo DONE!
 echo Add these to your PATH (manually):
 echo   %JDK_DEST%\bin
-echo   %TOOLS_DIR%\Git\bin
-echo   %KICK_DIR%
-echo   %X16_DIR%
 echo ========================================
 start rundll32 sysdm.cpl,EditEnvironmentVariables
 pause

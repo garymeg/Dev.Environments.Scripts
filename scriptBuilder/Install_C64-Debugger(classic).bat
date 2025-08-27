@@ -36,3 +36,17 @@ if "%DOWNLOADER%"=="curl" (
 :: Extract C64 Debugger
 tar -xf "%C64Debug_ZIP%" -C "%TEMP_DIR%"
 tar -xf "%TEMP_DIR%\C64-65XE-Debugger-v0.64.58-win32.zip" --strip-components=1 -C "%C64Debug_DIR%"
+
+:: Cleanup
+del "%C64Debug_ZIP%"
+
+:: Final messages
+echo.
+echo ========================================
+echo DONE!
+echo Add these to your PATH (manually):
+echo   %C64Debug_DIR%
+echo ========================================
+start rundll32 sysdm.cpl,EditEnvironmentVariables
+pause
+@echo on
