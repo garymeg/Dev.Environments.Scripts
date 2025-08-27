@@ -33,7 +33,7 @@ if "%DOWNLOADER%"=="curl" (
 )
 
 :: Install Visual Studio Code
-"%VSCODE_EXE%" /VERYSILENT /NORESTART /MERGETASKS=!runcode
+"%VSCODE_EXE%" /VERYSILENT /NORESTART /MERGETASKS=!runcode,addcontextmenufiles,addcontextmenufolders
 
 :: Update PATH
 setx PATH "PATH=%PATH%;%USERPROFILE%\AppData\Local\Programs\Microsoft VS Code\bin"

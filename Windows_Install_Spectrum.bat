@@ -62,7 +62,7 @@ set "VSCODE_URL=https://update.code.visualstudio.com/latest/win32-x64-user/stabl
 set "VSCODE_EXE=%TEMP_DIR%\vscode-installer.exe"
 
 curl -L -o "%VSCODE_EXE%" "%VSCODE_URL%"
-"%VSCODE_EXE%" /VERYSILENT /NORESTART /MERGETASKS=!runcode
+"%VSCODE_EXE%" /VERYSILENT /NORESTART /MERGETASKS=!runcode,addcontextmenufiles,addcontextmenufolders
 
 set PATH=%PATH%;%USERPROFILE%\AppData\Local\Programs\Microsoft VS Code\bin
 
