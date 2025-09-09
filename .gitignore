@@ -1,6 +1,6 @@
 .gitignore
 *.pdf
-Samba_Install.sh
 Default Workspaces
-*.code-workspace
 *.source.txt
+*.sh
+nes-hello-world
