@@ -114,6 +114,21 @@ set "RETRODEBUG_ZIP=%TEMP_DIR%\RetroDebugger.zip"
 
 curl -L -o "%RETRODEBUG_ZIP%" "%RETRODEBUG_URL%"
 tar -xf "%RETRODEBUG_ZIP%" --strip-components=1 -C "%RETRODEBUG_DIR%"
+mkdir "%RETRODEBUG_DIR%\roms" 2>nul
+echo.
+echo.
+echo Copying ROMs to "%RETRODEBUG_DIR%\roms"
+echo.
+echo Note the location of your ROMs folder:
+echo   %RETRODEBUG_DIR%\roms
+echo.
+echo you will need this when first time
+echo you run RetroDebugger
+echo.
+copy /y "RetroDebuggerROMS\*" "%RETRODEBUG_DIR%\roms\" >nul 2>nul
+:: Cleanup
+del "%RETRODEBUG_ZIP%"
+del "%NES_ZIP%"
 
 @echo on
 > %SETTINGS_FILE% echo {

@@ -7,10 +7,11 @@ set "TEMP_DIR=%TEMP%\DevSetup"
 set "CONFIG_DIR=%USERPROFILE%\AppData\Roaming\Code\User"
 set "SETTINGS_FILE=%CONFIG_DIR%\settings.json"
 
+set "APPLE_DIR=%TOOLS_DIR%\AppleII_Emu"
 set "JDK_DEST=%TOOLS_DIR%\jdk"
 set "KICK_DIR=%TOOLS_DIR%\KickAssembler"
 set "X16_DIR=%TOOLS_DIR%\CommanderX16"
-set "C64_DIR=%TOOLS_DIR%\VICE"
+set "VICE_DIR=%TOOLS_DIR%\VICE"
 set "NES_DIR=%TOOLS_DIR%\NES"
 set "RETRODEBUG_DIR=%TOOLS_DIR%\RetroDebugger"
 set "C64DeBug_DIR=%TOOLS_DIR%\C64Debugger"
@@ -27,15 +28,16 @@ set "BEEBASM_EXTENSION=simondotm.beeb-vsc"
 mkdir "%TOOLS_DIR%" 2>nul
 mkdir "%TEMP_DIR%" 2>nul
 mkdir "%JDK_DEST%" 2>nul
-mkdir "%KICK_DIR%" 2>nul
+mkdir "%APPLE_DIR%" 2>nul
 mkdir "%BEEBEM_DIR%" 2>nul
-mkdir "%BEEBASM_DIR%" 2>nul
-mkdir "%C64_DIR%" 2>nul
-mkdir "%C64DeBug_DIR%" 2>nul
-mkdir "%X16_DIR%" 2>nul
-mkdir "%PASMO_DIR%" 2>nul
-mkdir "%ZESARUX_DIR%" 2>nul
 mkdir "%NES_DIR%" 2>nul
+mkdir "%VICE_DIR%" 2>nul
+mkdir "%X16_DIR%" 2>nul
+mkdir "%ZESARUX_DIR%" 2>nul
+mkdir "%BEEBASM_DIR%" 2>nul
+mkdir "%KICK_DIR%" 2>nul
+mkdir "%PASMO_DIR%" 2>nul
+mkdir "%C64DeBug_DIR%" 2>nul
 mkdir "%RETRODEBUG_DIR%" 2>nul
 
 :: Check for curl or fallback
@@ -123,6 +125,30 @@ curl -L -o "%BEEBASM_ZIP%" "%BEEBASM_URL%"
 tar -xf "%BEEBASM_ZIP%" -C "%BEEBASM_DIR%"
 
 echo ========================================
+echo DOWNLOADING PASMO ASSEMBLER
+echo ========================================
+set "PASMO_URL=https://pasmo.speccy.org/bin/pasmo-0.5.4.beta2.zip"
+set "PASMO_ZIP=%TEMP_DIR%\pasmo.zip"
+
+echo ========================================
+echo DOWNLOADING VASM ASSEMBLER
+echo ========================================
+:: Set installation directories
+set "VASM_URL=http://sun.hasenbraten.de/vasm/bin/rel/vasm6502_std_Win64.zip"
+set "VASM_DIR=%TOOLS_DIR%\Vasm-Assembler"
+mkdir "%VASM_DIR%" 2>nul
+
+:: Download VASM Assembler
+if "%DOWNLOADER%"=="curl" (
+    curl -L -o "%VASM_DIR%\vasm6502_std_Win64.zip" "%VASM_URL%"
+) else (
+    bitsadmin /transfer "VASM_Download" "%VASM_URL%" "%VASM_DIR%\vasm6502_std_Win64.zip"
+)
+
+:: Extract VASM Assembler
+tar -xf "%VASM_DIR%\vasm6502_std_Win64.zip" -C "%VASM_DIR%"
+
+echo ========================================
 echo DOWNLOADING beebem EMULATOR
 echo ========================================
 set "beebem_url=https://github.com/stardot/beebem-windows/releases/download/4.19/BeebEm419.zip"
@@ -131,6 +157,9 @@ set "beebem_ZIP=%TEMP_DIR%\beebem419.zip"
 curl -L -o "%beebem_ZIP%" "%beebem_url%"
 tar -xf "%beebem_ZIP%" -C "%TOOLS_DIR%"
 
+curl -L -o "%PASMO_ZIP%" "%PASMO_URL%"
+tar -xf "%PASMO_ZIP%" -C "%PASMO_DIR%"
+
 echo ========================================
 echo DOWNLOADING VICE EMULATOR
 echo ========================================
@@ -138,18 +167,7 @@ set "VICE_URL=https://github.com/VICE-Team/svn-mirror/releases/download/r45737/G
 set "VICE_ZIP=%TEMP_DIR%\VICE.zip"
 
 curl -L -o "%VICE_ZIP%" "%VICE_URL%"
-tar -xf "%VICE_ZIP%" --strip-components=1 -C "%C64_DIR%"
-
-echo ========================================
-echo DOWNLOADING C64 Debugger
-echo ========================================
-set "C64Debug_URL=https://commodore.software/downloads?task=download.send&id=13870:c64-debugger-v0-64-58-all-platforms&catid=675"
-set "C64Debug_ZIP=%TEMP_DIR%\C64Debug.zip"
-
-curl -L -o "%C64Debug_ZIP%" "%C64Debug_URL%"
-tar -xf "%C64Debug_ZIP%" -C "%TEMP_DIR%"
-
-tar -xf "%TEMP_DIR%\C64-65XE-Debugger-v0.64.58-win32.zip" --strip-components=1 -C "%C64DeBug_DIR%"
+tar -xf "%VICE_ZIP%" --strip-components=1 -C "%VICE_DIR%"
 
 echo ========================================
 echo DOWNLOADING COMMANDER X16 EMULATOR
@@ -159,15 +177,6 @@ set "X16_ZIP=%TEMP_DIR%\x16.zip"
 
 curl -L -o "%X16_ZIP%" "%X16_URL%"
 tar -xf "%X16_ZIP%" -C "%X16_DIR%"
-
-echo ========================================
-echo DOWNLOADING PASMO ASSEMBLER
-echo ========================================
-set "PASMO_URL=https://pasmo.speccy.org/bin/pasmo-0.5.4.beta2.zip"
-set "PASMO_ZIP=%TEMP_DIR%\pasmo.zip"
-
-curl -L -o "%PASMO_ZIP%" "%PASMO_URL%"
-tar -xf "%PASMO_ZIP%" -C "%PASMO_DIR%"
 
 echo ========================================
 echo DOWNLOADING ZEsarUX EMULATOR
@@ -180,15 +189,6 @@ curl -L -o "%ZESARUX_ZIP%" "%ZESARUX_URL%"
 tar -xf "%ZESARUX_ZIP%" --strip-components=1 -C "%ZESARUX_DIR%"
 
 echo ========================================
-echo DOWNLOADING RETRO Debugger
-echo ========================================
-set "RETRODEBUG_URL=https://github.com/slajerek/RetroDebugger/releases/download/v0.64.72/RetroDebugger.v0.64.72-windows-x64-notsigned.zip"
-set "RETRODEBUG_ZIP=%TEMP_DIR%\RetroDebugger.zip"
-
-curl -L -o "%RETRODEBUG_ZIP%" "%RETRODEBUG_URL%"
-tar -xf "%RETRODEBUG_ZIP%" --strip-components=1 -C "%RETRODEBUG_DIR%"
-
-echo ========================================
 echo DOWNLOADING NES EMULATOR
 echo ========================================
 
@@ -198,6 +198,48 @@ set "NES_ZIP=%TEMP_DIR%\NES.zip"
 
 curl -L -o "%NES_ZIP%" "%NES_URL%"
 tar -xf "%NES_ZIP%" -C "%NES_DIR%"
+
+
+echo ========================================
+echo DOWNLOADING Apple II EMULATOR
+echo ========================================
+
+:: Set installation directories
+set "APPLE2_DIR=%TOOLS_DIR%\AppleII_Emu"
+set "APPLE2_URL=https://github.com/AppleWin/AppleWin/releases/download/v1.30.21.0/AppleWin1.30.21.0.zip"
+set "APPLE2_ZIP=%TEMP_DIR%\AppleIIEmulator.zip"
+mkdir "%APPLE2_DIR%" 2>nul
+
+:: Download Apple II Emulator
+if "%DOWNLOADER%"=="curl" (
+    curl -L -o "%APPLE2_ZIP%" "%APPLE2_URL%"
+) else (
+    bitsadmin /transfer "APPLE2_Download" "%APPLE2_URL%" "%APPLE2_ZIP%"
+)
+
+:: Extract Apple II Emulator
+tar -xf "%APPLE2_ZIP%" -C "%APPLE2_DIR%"
+
+echo ========================================
+echo DOWNLOADING C64 Debugger
+echo ========================================
+set "C64Debug_URL=https://commodore.software/downloads?task=download.send&id=13870:c64-debugger-v0-64-58-all-platforms&catid=675"
+set "C64Debug_ZIP=%TEMP_DIR%\C64Debug.zip"
+
+curl -L -o "%C64Debug_ZIP%" "%C64Debug_URL%"
+tar -xf "%C64Debug_ZIP%" -C "%TEMP_DIR%"
+
+tar -xf "%TEMP_DIR%\C64-65XE-Debugger-v0.64.58-win32.zip" --strip-components=1 -C "%C64DeBug_DIR%"
+
+
+echo ========================================
+echo DOWNLOADING RETRO Debugger
+echo ========================================
+set "RETRODEBUG_URL=https://github.com/slajerek/RetroDebugger/releases/download/v0.64.72/RetroDebugger.v0.64.72-windows-x64-notsigned.zip"
+set "RETRODEBUG_ZIP=%TEMP_DIR%\RetroDebugger.zip"
+
+curl -L -o "%RETRODEBUG_ZIP%" "%RETRODEBUG_URL%"
+tar -xf "%RETRODEBUG_ZIP%" --strip-components=1 -C "%RETRODEBUG_DIR%"
 
 @echo on
 > %SETTINGS_FILE% echo {
@@ -218,11 +260,30 @@ tar -xf "%NES_ZIP%" -C "%NES_DIR%"
 >> %SETTINGS_FILE% echo     }
 >> %SETTINGS_FILE% echo }
 @echo off
+
+:: Install Visual Studio Code extensions
 cls
 start /MIN code --install-extension "%EXTENSION%" --force
 start /MIN code --install-extension "%BEEBASM_EXTENSION%" --force
 start /MIN code --install-extension "%Z80EXTENSION%" --force
 
+:: copy some files 
+mkdir "%APPLE_DIR%\Tools" >nul 2>nul
+mkdir "%RETRODEBUG_DIR%\roms" >nul 2>nul
+copy /y "RetroDebuggerROMS\*" "%RETRODEBUG_DIR%\roms\" >nul 2>nul
+copy /y "AppleTools\*" "%APPLE_DIR%\Tools\*" >nul 2>nul
+
+:: Final Message
+echo.
+echo.
+echo Copying ROMs to "%RETRODEBUG_DIR%\roms"
+echo.
+echo Note the location of your ROMs folder:
+echo   %RETRODEBUG_DIR%\roms
+echo.
+echo you will need this when first time
+echo you run RetroDebugger
+echo.
 echo.
 echo ========================================
 echo DONE!
@@ -230,5 +291,19 @@ echo Add these to your PATH (manually):
 echo   %JDK_DEST%\bin
 echo ========================================
 start rundll32 sysdm.cpl,EditEnvironmentVariables
+
+
+:: Cleanup
+del "%RETRODEBUG_ZIP%"
+del "%NES_ZIP%"
+del "%KICK_ZIP%"
+del "%BEEBASM_ZIP%"
+del "%X16_ZIP%"
+del "%ATARI800_ZIP%"
+del "%PASMO_ZIP%"
+del "%ZESARUX_ZIP%"
+del "%JDK_ZIP%"
+del "%VASM_DIR%\vasm6502_std_Win64.zip"
+
 pause
 @echo on

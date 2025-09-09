@@ -37,6 +37,8 @@ if "%DOWNLOADER%"=="curl" (
 
 :: Extract Apple II Emulator
 tar -xf "%APPLE2_ZIP%" -C "%APPLE2_DIR%"
+mkdir "%APPLE2_DIR%\Tools"
+copy /y "AppleTools\*" "%APPLE2_DIR%\Tools\*"
 
 :: Cleanup
 del "%APPLE2_ZIP%"
